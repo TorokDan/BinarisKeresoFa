@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 
 namespace BinarisKeresoFa
 {
@@ -6,7 +7,7 @@ namespace BinarisKeresoFa
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            BinaryExpressionTree teszt = new BinaryExpressionTree(new BinaryExpressionTree.OperandNode('+'));
         }
     }
 }
