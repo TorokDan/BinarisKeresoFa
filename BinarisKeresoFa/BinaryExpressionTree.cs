@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace BinarisKeresoFa
 {
     public class BinaryExpressionTree
@@ -68,6 +71,26 @@ namespace BinarisKeresoFa
         public BinaryExpressionTree(Node root)
         {
             _root = root;
+        }
+
+        public static BinaryExpressionTree Build(string expression) => Build(expression.ToCharArray());
+
+        public static BinaryExpressionTree Build(char[] expression)
+        {
+            Stack<Node> data = new Stack<Node>();
+            foreach (char item in expression)
+            {
+                int num = item - '0';
+                if (0 <= num && num <= 9)
+                {
+                    data.Push(new OperandNode(item));
+                }
+                else
+                {
+                    data.Push(new OperatorNode(item, data.Pop(), data.Pop()));
+                }
+            }
+            return new BinaryExpressionTree(data.Pop());
         }
     }
 }
