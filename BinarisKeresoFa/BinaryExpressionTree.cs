@@ -78,8 +78,9 @@ namespace BinarisKeresoFa
         public static BinaryExpressionTree Build(char[] expression)
         {
             Stack<Node> data = new Stack<Node>();
-            foreach (char item in expression)
+            for (var index = 0; index < expression.Length; index++)
             {
+                char item = expression[index];
                 int num = item - '0';
                 if (0 <= num && num <= 9)
                 {
@@ -87,10 +88,24 @@ namespace BinarisKeresoFa
                 }
                 else
                 {
-                    data.Push(new OperatorNode(item, data.Pop(), data.Pop()));
+                    data.Push(new OperatorNode(item, data.Pop(), new OperandNode(expression[++index])));
                 }
             }
+
             return new BinaryExpressionTree(data.Pop());
+        }
+
+        public override string ToString() => _root.Left == null && _root.Right == null ? String.Empty : this.ToString(_root);
+
+        public string ToString(Node node)
+        {
+            string tmp = String.Empty;
+            if (node.Left != null)
+                tmp += ToString(node.Left);
+            if (node.Right != null)
+                tmp += ToString(node.Right);
+            return tmp + node.Data;
+            
         }
     }
 }
