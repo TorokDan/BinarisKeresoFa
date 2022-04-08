@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarisKeresoFa", "BinarisKeresoFa\BinarisKeresoFa.csproj", "{D121AA21-B712-4BA8-B20B-82F4B662269E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarisKeresoFa.UnitTests", "BinarisKeresoFa.UnitTests\BinarisKeresoFa.UnitTests.csproj", "{4848048A-4B1E-4BE7-B81F-2E251BE24C89}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{D121AA21-B712-4BA8-B20B-82F4B662269E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D121AA21-B712-4BA8-B20B-82F4B662269E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D121AA21-B712-4BA8-B20B-82F4B662269E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4848048A-4B1E-4BE7-B81F-2E251BE24C89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4848048A-4B1E-4BE7-B81F-2E251BE24C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4848048A-4B1E-4BE7-B81F-2E251BE24C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4848048A-4B1E-4BE7-B81F-2E251BE24C89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
