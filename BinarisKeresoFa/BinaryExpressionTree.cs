@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace BinarisKeresoFa
 {
@@ -78,9 +79,9 @@ namespace BinarisKeresoFa
         public static BinaryExpressionTree Build(char[] expression)
         {
             Stack<Node> data = new Stack<Node>();
-            for (var index = 0; index < expression.Length; index++)
+            foreach (var t in expression)
             {
-                char item = expression[index];
+                char item = t;
                 int num = item - '0';
                 if (0 <= num && num <= 9)
                 {
@@ -88,14 +89,14 @@ namespace BinarisKeresoFa
                 }
                 else
                 {
-                    data.Push(new OperatorNode(item, data.Pop(), new OperandNode(expression[++index])));
+                    Node tmp = data.Pop();
+                    data.Push(new OperatorNode(item, data.Pop(), tmp));
                 }
             }
-
             return new BinaryExpressionTree(data.Pop());
         }
 
-        public override string ToString() => _root.Left == null && _root.Right == null ? String.Empty : this.ToString(_root);
+        public override string ToString() => -_root.Data == null ? String.Empty : this.ToString(_root); //  _root.Left == null && _root.Right == null 
 
         public string ToString(Node node)
         {
@@ -105,7 +106,19 @@ namespace BinarisKeresoFa
             if (node.Right != null)
                 tmp += ToString(node.Right);
             return tmp + node.Data;
-            
+        }
+
+        public string Convert() => _root == null ? string.Empty : this.Convert(_root);
+
+        public string Convert(Node node)
+        {
+            string tmp = String.Empty;
+            if (node.Left != null)
+                tmp += Convert(node.Left);
+            tmp += node.Data;
+            if (node.Right != null)
+                tmp += Convert(node.Right);
+            return node is OperatorNode ? $"({tmp})" : tmp;
         }
     }
 }
