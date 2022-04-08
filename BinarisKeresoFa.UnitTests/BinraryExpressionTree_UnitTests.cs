@@ -39,5 +39,21 @@ namespace BinarisKeresoFa.UnitTests
         {
             Assert.AreEqual( expRes, BinaryExpressionTree.Build(input).Convert());
         }
+
+        [Test]
+        [TestCase("28+", 5, TestName = "Simple operation")]
+        [TestCase( "28-", -6, TestName = "Simple operation")]
+        [TestCase("28*", 16, TestName = "Simple operation")]
+        [TestCase("28/", 0.25, TestName = "Simple operation")]
+        [TestCase("23^", 256, TestName = "Simple operation")]
+        [TestCase("234*+", 14, TestName = "Example operation")]
+        [TestCase("23*4+", 10, TestName = "Example operation")]
+        [TestCase("23*45*+", 26, TestName = "Example operation")]
+        [TestCase("23+45-/", -5, TestName = "Example operation")]
+        [TestCase("23+4*5+67^8+/", 0.00009, TestName = "Example operation")]
+        public void Evaluate(string data, double expRes)
+        {
+            Assert.AreEqual( expRes, BinaryExpressionTree.Build(data).Evaluate());
+        }
     }
 }

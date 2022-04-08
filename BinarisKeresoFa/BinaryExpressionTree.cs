@@ -120,5 +120,26 @@ namespace BinarisKeresoFa
                 tmp += Convert(node.Right);
             return node is OperatorNode ? $"({tmp})" : tmp;
         }
+
+        public double Evaluate() => _root == null ? 0 : this.Evaluate(_root);
+
+        public double Evaluate(Node node)
+        {
+            if (node == null)
+                return 0;
+            if (node is OperatorNode)
+                return node.Data;
+            double left = Evaluate(node.Left);
+            double right = Evaluate(node.Right);
+            return node.Data switch
+            {
+                '+' => left + right,
+                '-' => left - right,
+                '*' => left * right,
+                '/' => left / right,
+                '^' => Math.Pow(left, right),
+                _ => throw new ArgumentOutOfRangeException() // TODO ide kéne még valami szerintem, de nem értem a feladatot....
+            };
+        }
     }
 }
