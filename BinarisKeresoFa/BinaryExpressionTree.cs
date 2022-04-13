@@ -69,7 +69,7 @@ namespace BinarisKeresoFa
 
         public Node Root => _root;
 
-        public BinaryExpressionTree(Node root)
+        private BinaryExpressionTree(Node root)
         {
             _root = root;
         }
@@ -79,20 +79,30 @@ namespace BinarisKeresoFa
         public static BinaryExpressionTree Build(char[] expression)
         {
             Stack<Node> data = new Stack<Node>();
-            foreach (var t in expression)
+            for (var index = 0; index < expression.Length; index++)
             {
+                var t = expression[index];
                 char item = t;
                 int num = item - '0';
                 if (0 <= num && num <= 9)
                 {
                     data.Push(new OperandNode(item));
                 }
-                else
+                else if (num == (int) Operator.Add ||
+                         num == (int) Operator.Div ||
+                         num == (int) Operator.Mul ||
+                         num == (int) Operator.Pow ||
+                         num == (int) Operator.Sub)
                 {
                     Node tmp = data.Pop();
                     data.Push(new OperatorNode(item, data.Pop(), tmp));
                 }
+                else
+                {
+                    throw new InvalidExpressionException(expression.ToString(), index);
+                }
             }
+
             return new BinaryExpressionTree(data.Pop());
         }
 
@@ -138,7 +148,7 @@ namespace BinarisKeresoFa
                 '*' => left * right,
                 '/' => left / right,
                 '^' => Math.Pow(left, right),
-                _ => throw new ArgumentOutOfRangeException() // TODO ide kéne még valami szerintem, de nem értem a feladatot....
+                _ => throw new InvalidExpressionException("Nem elfogadott operátor.", node.Data) // TODO ide kéne még valami szerintem, de nem értem a feladatot....
             };
         }
     }
